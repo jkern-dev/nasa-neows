@@ -12,11 +12,6 @@ client = boto3.client('athena')
 queryStart = client.start_query_execution(
     QueryString = f"""
     INSERT INTO nasa_neows_prod
-    # (external_location='s3://nasa-neows-parquet-prod/{DATETIME_NOW_INT_STR}/',
-    # format='PARQUET',
-    # write_compression='SNAPPY',
-    # partitioned_by = ARRAY['close_approach_date'])
-    # AS
 
     SELECT
         *

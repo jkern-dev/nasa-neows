@@ -27,7 +27,7 @@ queryStart = client.start_query_execution(
         is_sentry_object,
         close_approach_date
     FROM "neow_db"."nasa_neows_firehose_jk"
-    WHERE close_approach_date > (select max(close_approach_date) from "neow_db"."nasa_neows_prod")
+    WHERE close_approach_date not in (select close_approach_date from "neow_db"."nasa_neows_prod")
 
     ;
     """,
