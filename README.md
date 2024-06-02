@@ -17,7 +17,7 @@ Nasa Neows uses serverless technology to ingest and analyze near earth object we
  - How large are the asteroids that are passing by earth?
 
 # Architecture
- 1. We are using AWS Lambda to pull data from the NASA API and place the returned data into AWS Firehose
+ 1. We are using AWS Lambda to pull data from the NASA API and place the returned data into AWS Firehose. This is done in [get_neows](https://github.com/jkern-dev/nasa-neows/blob/main/get_neows.py)
  2. After a certain amount of time Firehose will place the received data into an S3 bucket
  3. An AWS Glue Workflow will initiate and create our production table in AWS Athena
   - A crawler will create a table in Athena from our data in S3 bucket
