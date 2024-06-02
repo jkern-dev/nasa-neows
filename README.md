@@ -27,3 +27,9 @@ Nasa Neows uses serverless technology to ingest and analyze near earth object we
   - A [publish_prod](https://github.com/jkern-dev/nasa-neows/blob/main/glue_jobs/publish_prod.py) will then insert our transformed data from our temporary table and place it into our production table that is used with Grafana
 4. Data from our production table is then queried in Grafana and visualizations are built to answer the questions listed above. 
 ![architecture](architecture.png)
+
+# Data Visualization
+Below is a snapshot of our Grafana Dashboard as of 6/2/24
+![Grafana Total Neows](grafana_total_neows.png)
+![Grafana Velocity & Proximity](grafana_velocity_proximity.png)
+![Grafana Size](grafana_size.png)
