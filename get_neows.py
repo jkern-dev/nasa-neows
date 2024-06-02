@@ -4,13 +4,20 @@ import urllib3
 from datetime import datetime
 from datetime import timedelta
 
+
 FIREHOSE_NAME = 'PUT-S3-qGMwB'
 
 def lambda_handler(event, context):
     http = urllib3.PoolManager()
+    
     start_date = datetime.now()
     end_date = start_date + timedelta(days = 6)
-    r = http.request("GET",f"https://api.nasa.gov/neo/rest/v1/feed?start_date={str(start_date.year)}-{str(start_date.month)}-{str(start_date.day)}.&end_date={str(end_date.year)}-{str(end_date.month)}-{str(end_date.day)}&api_key="#enter api key here)
+    
+    ssm_client = boto3.client('ssm')
+    response = ssm_client.get_parameter(Name='nasa_api', WithDecryption=True)
+    api_key = response['Parameter']['Value']
+    
+    r = http.request("GET",f"https://api.nasa.gov/neo/rest/v1/feed?start_date={str(start_date.year)}-{str(start_date.month)}-{str(start_date.day)}.&end_date={str(end_date.year)}-{str(end_date.month)}-{str(end_date.day)}&api_key={str(api_key)}")
     r_dict = json.loads(r.data.decode(encoding='utf-8', errors = 'strict'))
     neows = r_dict['near_earth_objects']
     # look through each day of the week neows
